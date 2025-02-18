@@ -17,8 +17,6 @@ public class BankApplication {
 
 
 
-/// /testesttest1dsads
-
 /// /testesttest1
         //hello
         
