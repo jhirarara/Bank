@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+Hello from test1
+=======
 
 Hello from branch test1
 
@@ -6,4 +9,8 @@ Hello from branch 2
 Hello from branch test1
 
 
+<<<<<<< HEAD
 Branch test1
+=======
+>>>>>>> origin/main
+>>>>>>> main
