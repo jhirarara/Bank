@@ -11,6 +11,7 @@ import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Service
@@ -27,7 +28,7 @@ public class UserService {
     public ResponseEntity<List<User>>findAllUsers() {
     System.out.println("UserDAOImplentation.findAll"+userDAO.findAll().toArray().length);
 
-
+        saveuser();
      try{
          List<User>hasUser=userDAO.findAll();
          return _Validation.hasContent.validate(hasUser)
@@ -59,5 +60,25 @@ public class UserService {
 
     }
 
+    public void  saveuser(){
+List<User> checkUser=  userDAO.findAll();
+
+
+
+
+              checkUser.forEach(user->{ System.out.println(user.getName());});
+
+    }
+
+
+
+
+
+
+
+
+
 
 }
+
+
