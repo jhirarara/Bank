@@ -31,7 +31,7 @@ public class UserService {
         saveuser();
      try{
          List<User>hasUser=userDAO.findAll();
-         return _Validation.hasContent.validate(hasUser)
+         return _Validation.hasContent(hasUser)
                  ? ResponseEntity.ok(hasUser)
                  : ResponseEntity.notFound().build();
 

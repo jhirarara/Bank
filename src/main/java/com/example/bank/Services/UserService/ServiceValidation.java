@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ServiceValidation{
 
-        interface checkContent <T,R>{
+        interface Validate <T,R>{
             R validate(T t);
 
         }
@@ -23,8 +23,11 @@ public interface ServiceValidation{
 
 
 class Validation  {
-    ServiceValidation.checkContent<List<?>,Boolean> hasContent= user-> !user.isEmpty();
+    ServiceValidation.Validate<List<?>,Boolean> checkContent= Content-> !Content.isEmpty();
 
+    public boolean hasContent(List<?> Content){
+        return checkContent.validate(Content);
+    }
 
 
 }
