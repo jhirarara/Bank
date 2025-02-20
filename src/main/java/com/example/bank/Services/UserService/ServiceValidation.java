@@ -23,7 +23,7 @@ public interface ServiceValidation{
 
 
 class Validation  {
-    ServiceValidation.Validate<List<?>,Boolean> checkContent= Content-> !Content.isEmpty();
+ private final    ServiceValidation.Validate<List<?>,Boolean> checkContent= Content-> !Content.isEmpty();
 
     public boolean hasContent(List<?> Content){
         return checkContent.validate(Content);
