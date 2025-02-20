@@ -26,9 +26,9 @@ public class UserService {
 
 
     public ResponseEntity<List<User>>findAllUsers() {
-    System.out.println("UserDAOImplentation.findAll"+userDAO.findAll().toArray().length);
 
-        saveuser();
+
+
      try{
          List<User>hasUser=userDAO.findAll();
          return _Validation.hasContent(hasUser)
@@ -54,23 +54,37 @@ public class UserService {
     public ResponseEntity<User> getUserbyID(long Id){
 
         Optional<User> user=userDAO.findById(Id);
+        try {
+            return user.map(ResponseEntity::ok)
+                    .orElseGet(() -> ResponseEntity.notFound().build());
 
-        return user.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
-
-    }
-
-    public void  saveuser(){
-List<User> checkUser=  userDAO.findAll();
-
-
-
-
-              checkUser.forEach(user->{ System.out.println(user.getName());});
+        }
+catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+}
 
     }
 
 
+
+
+public ResponseEntity<?> SaveUser(User Newuser){
+
+
+
+        try {
+            List<User> userList = userDAO.findAll();
+
+            System.out.println(Newuser.getPassword());
+            return _Validation.hasUserNameAvailability(userList, Newuser.getName()) ?  ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists") : ResponseEntity.ok(userDAO.save(Newuser));
+
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+        }
 
 
 

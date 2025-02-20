@@ -10,6 +10,12 @@ public interface ServiceValidation{
             R validate(T t);
 
         }
+    interface userCheck <T,U,R>{
+        R validate(T t,U u);
+
+    }
+
+
 
 
 
@@ -24,10 +30,21 @@ public interface ServiceValidation{
 
 class Validation  {
  private final    ServiceValidation.Validate<List<?>,Boolean> checkContent= Content-> !Content.isEmpty();
+    private final  ServiceValidation.userCheck<List<User>, String, Boolean> checkUserNameAvailability =
+            (users, newUsername) -> users.stream().anyMatch(user -> user.getName().equals(newUsername));
 
     public boolean hasContent(List<?> Content){
         return checkContent.validate(Content);
     }
+
+
+
+   public boolean hasUserNameAvailability(List<User> User ,String newUsername){
+        return checkUserNameAvailability.validate(User,newUsername);
+   }
+
+
+
 
 
 }
