@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,8 +77,9 @@ public ResponseEntity<?> SaveUser(User Newuser){
         try {
             List<User> userList = userDAO.findAll();
 
-            System.out.println(Newuser.getPassword());
-            return _Validation.hasUserNameAvailability(userList, Newuser.getName()) ?  ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists") : ResponseEntity.ok(userDAO.save(Newuser));
+         User savedUser=userDAO.save(Newuser);
+         URI location =URI.create("/users/"+savedUser.getId());
+            return _Validation.hasUserNameAvailability(userList, Newuser.getName()) ?  ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists") : ResponseEntity.created(location).body("User added successfully");
 
         }
         catch (Exception e) {
