@@ -16,8 +16,20 @@ public class router extends getService{
     router(UserService userService) {
         super(userService);
     }
-@GetMapping("/getUserID/{id}")
-    public ResponseEntity<User> allUser(@PathVariable Long id) {
+
+
+
+    @GetMapping("/userALl")
+    public ResponseEntity<List<User>> allUser() {
+
+
+        return getUserService().findAllUsers();
+    }
+
+
+
+    @GetMapping("/getUserID/{id}")
+    public ResponseEntity<?> allUser(@PathVariable Long id) {
 
 
     return getUserService().getUserbyID(id);
