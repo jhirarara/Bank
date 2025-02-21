@@ -10,6 +10,7 @@ public interface UserDAO {
    User  save(User user);
 
 
+   boolean deleteById(Long id);
 
 
 }

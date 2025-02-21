@@ -28,7 +28,7 @@ public class router extends getService{
 
 
 
-    @GetMapping("/getUserID/{id}")
+    @GetMapping("/getUserID/{Id}")
     public ResponseEntity<?> allUser(@PathVariable Long id) {
 
 
@@ -39,5 +39,14 @@ public class router extends getService{
     public ResponseEntity<?> createUser(@RequestBody User user){
     return getUserService().SaveUser(user);
 }
+
+@DeleteMapping("/Delete/{Id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long Id) {
+    return getUserService().DeleteUser(Id);
+}
+
+
+
+
 
 }

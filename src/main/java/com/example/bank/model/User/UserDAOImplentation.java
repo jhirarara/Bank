@@ -33,4 +33,22 @@ public User save (User user){
 
 
 
+  @Override
+    public boolean deleteById(Long id){
+
+try {
+if(userRepository.existsById(id)){
+    userRepository.deleteById(id);
+    return true;
+}
+ else return false;
+
+
+
+}
+catch (Exception e){
+    return false;
+}
+  }
+
 }

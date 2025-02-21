@@ -70,16 +70,11 @@ catch (Exception e) {
 
 
 public ResponseEntity<?> SaveUser(User Newuser){
-
-
-
         try {
             List<User> userList = userDAO.findAll();
-
          User savedUser=userDAO.save(Newuser);
          URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").build(savedUser.getId());
             return _Validation.hasUserNameAvailability(userList, Newuser.getName()) ?  ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists") : ResponseEntity.created(location).body("User added successfully");
-
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -89,6 +84,21 @@ public ResponseEntity<?> SaveUser(User Newuser){
         }
 
 
+
+public ResponseEntity<String> DeleteUser(long Id){
+    URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").build("Id not found"+ Id);
+
+    try {
+
+        return userDAO.deleteById(Id)? ResponseEntity.status(HttpStatus.NO_CONTENT).body("User Deleted"):ResponseEntity.status(HttpStatus.NOT_FOUND).body("No user found");
+
+
+        }catch ( Exception e) {
+        return ResponseEntity.internalServerError().body("Something went wrong");
+
+
+        }
+}
 
 
 
