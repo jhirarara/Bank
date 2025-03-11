@@ -90,7 +90,7 @@ public ResponseEntity<String> DeleteUser(long Id){
 
     try {
 
-        return userDAO.deleteById(Id)? ResponseEntity.status(HttpStatus.NO_CONTENT).body("User Deleted"):ResponseEntity.status(HttpStatus.NOT_FOUND).body("No user found");
+        return userDAO.deleteById(Id)? ResponseEntity.status(HttpStatus.OK).body("User Deleted"):ResponseEntity.status(HttpStatus.NOT_FOUND).body("No user found");
 
 
         }catch ( Exception e) {
