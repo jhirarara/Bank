@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -25,6 +27,17 @@ public class router extends getService{
 
         return getUserService().findAllUsers();
     }
+
+
+
+@PostMapping("/login")
+public ResponseEntity<Map<String,String>> postu(){
+Map<String,String>token=new HashMap<>();
+token.put("token","123123123");
+return ResponseEntity.ok(token);
+
+}
+
 
 
 
